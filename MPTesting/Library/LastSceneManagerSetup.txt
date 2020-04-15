@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Bearded Man Studios Inc/Scenes/MultiplayerMenu.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0

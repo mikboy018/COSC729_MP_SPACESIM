@@ -2443,7 +2443,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (h) Host (127.0.0.1:15937)
+  m_Text: (h) Host Game with Forge Master Server
 --- !u!222 &1853289101
 CanvasRenderer:
   m_ObjectHideFlags: 0

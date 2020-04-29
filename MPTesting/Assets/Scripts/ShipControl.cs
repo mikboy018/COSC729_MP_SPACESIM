@@ -20,9 +20,6 @@ public class ShipControl : ShipControlBehavior
     // health
     public int health = 100;
 
-    // ammo
-    int ammo = 100;
-
     public string team = "player";
 
     public Text healthStatus;
@@ -39,6 +36,9 @@ public class ShipControl : ShipControlBehavior
     public GameObject explosionEffect;
     public GameObject myCamera;
 
+    public Text timer;
+    private float startTime;
+
     void Start(){
         spawn();
         healthStatus.text = "Health: " + health.ToString();
@@ -51,6 +51,7 @@ public class ShipControl : ShipControlBehavior
             ears.enabled = true;
             myCamera.SetActive(true);
         }
+        startTime = Time.time;
     }
 
     private void spawn(){
@@ -78,7 +79,6 @@ public class ShipControl : ShipControlBehavior
             // respawn
             spawn();
             health = 100;
-            ammo = 100;
             if(networkObject.IsOwner){
                 healthStatus.text = "Health: " + health.ToString();
             }
@@ -144,18 +144,25 @@ public class ShipControl : ShipControlBehavior
 
     }
 
+    void Update(){
+        if(!gameLogic.GetComponent<GameLogic>().winCondition || gameLogic.GetComponent<GameLogic>().lossCondition){
+            float delta = Time.time - startTime;
+            string min = ((int)delta / 60).ToString();
+            string sec = (delta % 60).ToString("f2");
+            if((delta%60) < 10)
+                timer.text = min + ":0" + sec;
+            else
+                timer.text = min + ":" + sec;
+        }
+    }
+
     private void OnCollisionEnter(Collision col) {
-        //GetComponent<Rigidbody>().velocity = Vector3.zero;
-        //GetComponent<Rigidbody>().transform.localPosition = Vector3.zero;
         if(networkObject.IsServer){
             if(col.gameObject.CompareTag("Laser")){
-                //Debug.Log("Laser hit");
-                //Destroy(col.gameObject);
                 networkObject.SendRpc(RPC_SET_HEALTH, Receivers.AllBuffered, col.gameObject.GetComponent<LaserControl>().damage);
             } 
 
             if(col.gameObject.CompareTag("Planet")){
-                //Debug.Log("Collision with planet");
                 networkObject.SendRpc(RPC_SET_HEALTH, Receivers.AllBuffered, -1000);
             }  
         }

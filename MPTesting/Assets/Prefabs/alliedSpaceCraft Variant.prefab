@@ -18,6 +18,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8385328273108050144, guid: 88a64280253df5ed883427853cc33c8d,
         type: 3}
+    - target: {fileID: 1230414148286906253, guid: e07693e885e2838f18772018fd58299a,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1230414148286906254, guid: e07693e885e2838f18772018fd58299a,
         type: 3}
       propertyPath: team

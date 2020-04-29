@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Bearded Man Studios Inc/Scenes/MultiplayerMenu.unity
+- path: Assets/Scenes/MPFlightSim.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
